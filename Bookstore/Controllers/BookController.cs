@@ -123,7 +123,6 @@ namespace Bookstore.Controllers
             string[] lines = System.IO.File.ReadAllLines(path);
             Book book = new Book { BookId = Convert.ToInt32(lines[0]), AuthorName = lines[1], BookPrice = Convert.ToInt32(lines[2]) };
 
-
             return View(book);
         }
 
