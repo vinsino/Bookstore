@@ -135,6 +135,7 @@
     </Compile>
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\BookDBRepository.cs" />
+    <Compile Include="Models\BookService.cs" />
     <Compile Include="Models\BookTxtRepository.cs" />
     <Compile Include="Models\IBookRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -222,7 +223,9 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />

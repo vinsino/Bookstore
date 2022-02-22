@@ -11,11 +11,11 @@ namespace Bookstore.Controllers
     public class BookController : Controller
     {
 
-        private IBookRepository _repository;
+        private BookService _service;
         public BookController()
         {
-            _repository = new BookDBRepository();
-            //_repository = new BookTxtRepository();
+            _service = new BookService(new BookDBRepository());
+            //_service = new BookService(new BookTxtRepository());
 
         }
 
@@ -23,7 +23,7 @@ namespace Bookstore.Controllers
         // GET: Book
         public ActionResult Index()
         {
-            var ret = _repository.GetAll();
+            var ret = _service.GetAll();
             return View(ret);
         }
 
@@ -41,20 +41,20 @@ namespace Bookstore.Controllers
             if (!ModelState.IsValid)
                 return View();
 
-            bool ret = _repository.Insert(book);
+            bool ret = _service.Insert(book);
             return RedirectToAction("Index");
         }
 
 
         public ActionResult Details(int id)
         {
-            var ret = _repository.Get(id);
+            var ret = _service.Get(id);
             return View(ret);
         }
 
         public ActionResult Edit(int id)
         {
-            var ret = _repository.Get(id);
+            var ret = _service.Get(id);
             return View(ret);
         }
 
@@ -65,7 +65,7 @@ namespace Bookstore.Controllers
             if (!ModelState.IsValid) 
                 return View();
             
-            bool ret = _repository.Update(book);
+            bool ret = _service.Update(book);
             return RedirectToAction("Index");
 
         }
@@ -73,7 +73,7 @@ namespace Bookstore.Controllers
         
         public ActionResult Delete(int id)
         {
-            var ret = _repository.Get(id);
+            var ret = _service.Get(id);
             return View(ret);
         }
 
@@ -81,7 +81,7 @@ namespace Bookstore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, string confirmButton)
         {
-            var ret = _repository.Delete(id);
+            var ret = _service.Delete(id);
 
             if (!ret) return View();
             return RedirectToAction("Index");
@@ -89,7 +89,7 @@ namespace Bookstore.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            _repository.Dispose();
+            _service.Dispose();
             base.Dispose(disposing);
         }
     }
