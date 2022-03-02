@@ -1,0 +1,55 @@
+﻿@*@model Bookstore.Models.Book*@
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAngularjs.cshtml";
+}
+
+<h2>Edit</h2>
+
+<div class="form-horizontal" ng-controller="EditCtrl">
+    <h4>Book</h4>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Id</label>
+        <div class="col-md-10">
+            <input type="text" ng-model="Book.BookId" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Author</label>
+        <div class="col-md-10">
+            <input type="text" ng-model="Book.AuthorName" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Price</label>
+        <div class="col-md-10">
+            <input type="text" ng-model="Book.BookPrice" class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" ng-click="CallUpdateBook()" class="btn btn-default" />
+        </div>
+    </div>
+
+    <div>
+        <a ng-href="~/Book1/Index">Back to List</a>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    <script>
+        var bookid = @ViewBag.id;
+    </script>
+    <script src="~/Scripts/WebApp/Book1/EditCtrl.js"></script>
+}

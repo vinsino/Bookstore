@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_LayoutAngularjs.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<div ng-controller="DeleteCtrl">
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>ID</dt>
+        <dd ng-bind="Book.BookId"></dd>
+
+        <dt>Author</dt>
+        <dd ng-bind="Book.AuthorName"></dd>
+
+        <dt>Price</dt>
+        <dd ng-bind="Book.BookPrice"></dd>
+
+    </dl>
+
+    @* @Html.AntiForgeryToken()*@
+
+    <div class="form-actions no-color">
+        <input name="confirmButton" type="submit" value="Delete" ng-click="CallDeleteBook()" class="btn btn-default" /> |
+        <a ng-href="~/Book1/Index">Back to List</a>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <script>
+        var bookid = @ViewBag.id;
+    </script>
+    <script src="~/Scripts/WebApp/Book1/DeleteCtrl.js"></script>
+}

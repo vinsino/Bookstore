@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Bookstore";
+    Layout = "~/Views/Shared/_LayoutAngularjs.cshtml";    
+}
+
+<h2>Bookstore</h2>
+
+<div ng-controller="IndexCtrl">
+    <p>
+        <a ng-href="~/Book1/Create">Create NEW</a>
+    </p>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Author</th>
+            <th>Price</th>
+        </tr>
+
+        <tr ng-repeat="item in Books">
+            <td ng-bind="item.BookId"></td>
+            <td ng-bind="item.AuthorName"></td>
+            <td ng-bind="item.BookPrice"></td>
+            <td>
+                <a ng-href="~/Book1/Edit/{{item.BookId}}">Edit</a>
+                <a ng-href="~/Book1/Details/{{item.BookId}}">Details</a>
+                <a ng-href="~/Book1/Delete/{{item.BookId}}">Delete</a>
+            </td>
+        </tr>
+
+    </table>
+
+    
+
+
+</div>
+
+
+
+@section Scripts {
+    <script src="~/Scripts/WebApp/Book1/IndexCtrl.js"></script>
+}
