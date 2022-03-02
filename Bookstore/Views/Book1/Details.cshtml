@@ -1,0 +1,39 @@
+﻿
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAngularjs.cshtml";
+}
+
+<h2>Detail</h2>
+
+<div ng-controller="DetailsCtrl">
+    <h4>Book</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>ID</dt>
+        <dd ng-bind="Book.BookId"></dd>
+
+        <dt>Author</dt>
+        <dd ng-bind="Book.AuthorName"></dd>
+
+        <dt>Price</dt>
+        <dd ng-bind="Book.BookPrice"></dd>
+
+
+    </dl>
+    <p>
+        <a ng-href="~/Book1/Edit/{{Book.BookId}}">Edit</a>
+        <a ng-href="~/Book1/Index">Back to List</a>
+    </p>
+        
+</div>
+
+
+@section Scripts {
+    <script>
+        var bookid = @ViewBag.id;
+    </script>
+    <script src="~/Scripts/WebApp/Book1/DetailsCtrl.js"></script>
+}

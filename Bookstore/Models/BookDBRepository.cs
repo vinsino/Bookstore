@@ -59,7 +59,7 @@ namespace Bookstore.Models
         {
             int ret;
            
-            string sql = @"delete books where BookId=@id";
+            string sql = @"DELETE FROM books WHERE BookId=@id";
             ret = conn.Execute(sql, new { id });
            
             return ret > 0 ? true : false;
