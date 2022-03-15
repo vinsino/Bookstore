@@ -7,47 +7,47 @@ namespace Bookstore.Models
 {
     public class BookService : IDisposable
     {
-        private IBookRepository _repository;
+        private DBUnitOfWork _dbContext;
 
         public BookService()
         {
-            _repository = new BookDBRepository();
-        }
-
-        public BookService(IBookRepository repository)
-        {
-            _repository = repository;
-        }
-
+            _dbContext = new DBUnitOfWork();
+        }             
         public List<Book> GetAll()
         {
-            var books = _repository.GetAll();
+            var books = _dbContext.Book.GetAll();
             return books.Where(p => p.BookPrice >= 50).ToList();
         }
         public Book Get(int id)
         {
-            return _repository.Get(id);
+            return _dbContext.Book.Get(id);
         }
         public bool Insert(Book book)
         {
             if (book.BookPrice < 50)
                 book.BookPrice = 50;
-            return _repository.Insert(book);
+            var ret = _dbContext.Book.Insert(book);
+            _dbContext.Commit();
+            return ret;
         }
         public bool Update(Book book)
         {
             if (book.BookPrice < 50)
                 book.BookPrice = 50;
-            return _repository.Update(book);
+            var ret = _dbContext.Book.Update(book);
+            _dbContext.Commit();
+            return ret;
         }
         public bool Delete(int id)
         {
-            return _repository.Delete(id);
+            var ret = _dbContext.Book.Delete(id);
+            _dbContext.Commit();
+            return ret;
         }
 
         public void Dispose()
         {
-            _repository.Dispose();
+            _dbContext.Dispose();
         }
     }
 }

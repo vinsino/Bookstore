@@ -20,7 +20,7 @@ app.controller('DeleteCtrl', ['$scope', '$window', 'appService', '$rootScope', f
 
     $scope.Book = {};
 
-    $scope.CallDeleteBook = function (){
+    $scope.DeleteBook = function (){
         appService.DeleteBook({ id: $window.bookid })
             .then(function (ret) {
             $window.location.href = '/Book1/Index';

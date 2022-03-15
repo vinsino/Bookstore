@@ -11,20 +11,22 @@ namespace Bookstore.Models
 {
     public class BookDBRepository : IBookRepository, IDisposable
     {
-        private string _bookConnection = "";
-        private IDbConnection conn;
-        
-        public BookDBRepository()
+       
+        private IDbTransaction Transaction { get; set; }
+        private IDbConnection conn { get { return Transaction.Connection; } }
+            
+
+        public BookDBRepository(IDbTransaction transaction)
         {
-            _bookConnection = ConfigurationManager.ConnectionStrings["BookConnection"].ConnectionString;
-            conn = new SQLiteConnection(_bookConnection);
+            Transaction = transaction;
         }
+
         public List<Book> GetAll()
         {
             List<Book> ret;
             
             string sql = @"select * from books order by BookId";
-            ret = conn.Query<Book>(sql).ToList();
+            ret = conn.Query<Book>(sql, transaction: this.Transaction).ToList();  // optional arguments
             
             return ret;
         }
@@ -33,7 +35,7 @@ namespace Bookstore.Models
             Book ret;
             
             string sql = @"select * from books where BookId=@id";
-            ret = conn.Query<Book>(sql, new { id }).SingleOrDefault();
+            ret = conn.Query<Book>(sql, new { id }, transaction: this.Transaction).SingleOrDefault();
             
             return ret;
         }
@@ -42,7 +44,7 @@ namespace Bookstore.Models
             int ret;
             
             string sql = @"Insert into books (BookId, AuthorName, BookPrice) values (@BookId, @AuthorName, @BookPrice)";
-            ret = conn.Execute(sql, book);
+            ret = conn.Execute(sql, book, transaction: this.Transaction);
             
             return ret > 0 ? true : false;
         }
@@ -51,7 +53,7 @@ namespace Bookstore.Models
             int ret;
             
             string sql = @"Update books Set AuthorName=@AuthorName, BookPrice=@BookPrice where BookId=@BookId";
-            ret = conn.Execute(sql, book);
+            ret = conn.Execute(sql, book, transaction: this.Transaction);
             
             return ret > 0 ? true : false;
         }
@@ -60,14 +62,14 @@ namespace Bookstore.Models
             int ret;
            
             string sql = @"DELETE FROM books WHERE BookId=@id";
-            ret = conn.Execute(sql, new { id });
+            ret = conn.Execute(sql, new { id }, transaction: this.Transaction);
            
             return ret > 0 ? true : false;
         }
         public void Dispose()
         {
-            conn.Close();
-            conn.Dispose();
+            //conn.Close();
+            //conn.Dispose();
             return;
         }
     }

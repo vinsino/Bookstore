@@ -20,7 +20,7 @@ app.controller('EditCtrl', ['$scope', '$window', 'appService', '$rootScope', fun
 
     $scope.Book = {};
 
-    $scope.CallUpdateBook = function (){
+    $scope.UpdateBook = function (){
         appService.UpdateBook($scope.Book).then(function (ret) {
             $window.location.href = '/Book1/Index';
         });

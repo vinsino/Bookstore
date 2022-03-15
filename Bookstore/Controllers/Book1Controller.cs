@@ -5,18 +5,20 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Bookstore.Filters;
+
 
 namespace Bookstore.Controllers
-{
+{    
     public class Book1Controller : Controller
     {
 
         private BookService _service;
         public Book1Controller()
         {
-            _service = new BookService(new BookDBRepository());
+            //_service = new BookService(new BookDBRepository());
             //_service = new BookService(new BookTxtRepository());
-
+            _service = new BookService();
         }
 
         // GET: Book
@@ -25,6 +27,7 @@ namespace Bookstore.Controllers
             return View();
         }
 
+        [MyAuthorize]
         public ActionResult Create()
         {          
             return View();

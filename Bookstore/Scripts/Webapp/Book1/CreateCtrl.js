@@ -16,7 +16,7 @@ app.controller('CreateCtrl', ['$scope', '$window', 'appService', '$rootScope', f
 
     $scope.Book = {};
 
-    $scope.CallCreateBook = function (){
+    $scope.CreateBook = function (){
         appService.CreateBook($scope.Book)
             .then(function (ret) {
             $window.location.href = '/Book1/Index';

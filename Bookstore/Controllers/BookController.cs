@@ -14,9 +14,9 @@ namespace Bookstore.Controllers
         private BookService _service;
         public BookController()
         {
-            _service = new BookService(new BookDBRepository());
+            //_service = new BookService(new BookDBRepository());
             //_service = new BookService(new BookTxtRepository());
-
+            _service = new BookService();
         }
 
 

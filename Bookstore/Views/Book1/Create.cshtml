@@ -9,6 +9,7 @@
 
 <div class="form-horizontal" ng-controller="CreateCtrl">
     <h4>Book</h4>
+    <h4>@Session["empno"]</h4>
     <hr />
 
     <div class="form-group">
@@ -34,10 +35,10 @@
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" ng-click="CallCreateBook()" class="btn btn-default" />
+            <input type="submit" value="Save" ng-click="CreateBook()" class="btn btn-default" />
         </div>
     </div>
-    
+
     <div>
         <a ng-href="~/Book1/Index">Back to List</a>
     </div>
