@@ -22,8 +22,8 @@ namespace Bookstore.Models
             {
                 if (_transaction == null)
                 {
-                    _connection.Open();
-                    _transaction = _connection.BeginTransaction();
+                    _connection.Open(); //  dapper will open connection automatically when dapper query or execute (maybe?), but below we call idb.begintransaction first, connection has to be opened manually 
+                    _transaction = _connection.BeginTransaction();    
                 }
                 return _transaction;
             }

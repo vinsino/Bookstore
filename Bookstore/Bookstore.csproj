@@ -141,6 +141,9 @@
     <Compile Include="Models\BookTxtRepository.cs" />
     <Compile Include="Models\DBUnitOfWork.cs" />
     <Compile Include="Models\IBookRepository.cs" />
+    <Compile Include="Models\IUserRepository.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserDBRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

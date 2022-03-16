@@ -9,7 +9,8 @@ using Bookstore.Filters;
 
 
 namespace Bookstore.Controllers
-{    
+{
+    [MyAuthorize]
     public class Book1Controller : Controller
     {
 
@@ -26,8 +27,7 @@ namespace Bookstore.Controllers
         {
             return View();
         }
-
-        [MyAuthorize]
+               
         public ActionResult Create()
         {          
             return View();

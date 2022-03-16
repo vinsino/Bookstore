@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Text.RegularExpressions;
+using Bookstore.Models;
 
 namespace Bookstore.Filters
 {
@@ -28,17 +29,25 @@ namespace Bookstore.Filters
                 filterContext.Result = new EmptyResult();
                 return;
             }
+
             string loginUser = filterContext.HttpContext.User.Identity.Name;
             Match m = Regex.Match(loginUser, @"\\{0,1}(\d{4})@{0,1}");          //   SECLTD   \7596@
             if (m.Success)
                 loginUser = m.Groups[1].ToString(); // 7596
             //-------------------------------------------------------
+
             if (filterContext.HttpContext.Session["empno"] == null)
             {
-                //Get Userinfo
-                filterContext.HttpContext.Session["empno"] = loginUser;
-                filterContext.HttpContext.Session["empname"] = loginUser;
-                
+                using (var userRepository = new UserDBRepository())
+                {
+                    var ret = userRepository.Get(loginUser);
+
+                    //Get Userinfo
+                    filterContext.HttpContext.Session["empno"] = loginUser;
+                    filterContext.HttpContext.Session["empname"] = ret.UserName;
+                    filterContext.HttpContext.Session["role"] = ret.Role;
+                }
+
             }
 
         }
